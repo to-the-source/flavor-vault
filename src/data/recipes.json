@@ -1,0 +1,404 @@
+{
+  "recipes": [
+    {
+      "id": "1",
+      "name": "Classic Margherita Pizza",
+      "ingredients": ["pizza dough", "tomato sauce", "fresh mozzarella", "fresh basil", "olive oil", "salt"],
+      "instructions": "Preheat oven to 475°F. Roll out dough, spread sauce, add cheese, bake for 12-15 minutes, top with fresh basil.",
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "tags": ["italian", "pizza", "vegetarian"]
+    },
+    {
+      "id": "2",
+      "name": "Chicken Stir Fry",
+      "ingredients": ["chicken breast", "bell peppers", "broccoli", "soy sauce", "garlic", "ginger", "sesame oil"],
+      "instructions": "Slice chicken and vegetables. Stir-fry chicken until cooked, add vegetables, sauce, and seasonings. Cook until vegetables are tender-crisp.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "servings": 3,
+      "tags": ["asian", "quick", "healthy"]
+    },
+    {
+      "id": "3",
+      "name": "Chocolate Chip Cookies",
+      "ingredients": ["flour", "butter", "sugar", "brown sugar", "eggs", "vanilla extract", "chocolate chips"],
+      "instructions": "Cream butter and sugars, add eggs and vanilla. Mix in dry ingredients, fold in chocolate chips. Bake at 375°F for 9-11 minutes.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "servings": 24,
+      "tags": ["dessert", "baking", "sweet"]
+    },
+    {
+      "id": "4",
+      "name": "Spaghetti Carbonara",
+      "ingredients": ["spaghetti", "egg yolks", "parmesan cheese", "pancetta", "garlic", "black pepper"],
+      "instructions": "Cook spaghetti. Cook pancetta and garlic, add egg yolks and parmesan. Mix with spaghetti and serve.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "servings": 4,
+      "tags": ["italian", "pasta", "comfort food"]
+    },
+    {
+      "id": "5",
+      "name": "Beef and Broccoli",
+      "ingredients": ["beef", "broccoli", "soy sauce", "garlic", "ginger", "sesame oil"],
+      "instructions": "Slice beef and vegetables. Stir-fry beef until cooked, add vegetables, sauce, and seasonings. Cook until vegetables are tender-crisp.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "servings": 4,
+      "tags": ["asian", "beef", "healthy"]
+    },
+    {
+      "id": "6",
+      "name": "Pasta Carbonara",
+      "ingredients": ["pasta", "egg yolks", "parmesan cheese", "pancetta", "garlic", "black pepper"],
+      "instructions": "Cook pasta. Cook pancetta and garlic, add egg yolks and parmesan. Mix with pasta and serve.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "servings": 4,
+      "tags": ["italian", "pasta", "comfort food"]
+    },
+    {
+      "id": "7",
+      "name": "Vegetable Curry",
+      "ingredients": ["potatoes", "carrots", "peas", "coconut milk", "curry powder", "onion", "garlic", "ginger", "vegetable broth"],
+      "instructions": "Sauté onions, garlic, and ginger. Add vegetables and curry powder, then coconut milk and broth. Simmer until vegetables are tender.",
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 25,
+      "servings": 4,
+      "tags": ["vegetarian", "indian", "spicy"]
+    },
+    {
+      "id": "8",
+      "name": "Greek Salad",
+      "ingredients": ["cucumber", "tomatoes", "red onion", "feta cheese", "kalamata olives", "olive oil", "lemon juice", "oregano"],
+      "instructions": "Chop vegetables and combine with olives and feta. Whisk together olive oil, lemon juice, and oregano for dressing. Toss and serve.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 0,
+      "servings": 4,
+      "tags": ["vegetarian", "salad", "mediterranean", "quick"]
+    },
+    {
+      "id": "9",
+      "name": "Beef Tacos",
+      "ingredients": ["ground beef", "taco seasoning", "tortillas", "lettuce", "tomatoes", "cheese", "sour cream", "avocado"],
+      "instructions": "Brown beef and add taco seasoning. Warm tortillas. Assemble tacos with beef and toppings.",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "tags": ["mexican", "quick", "family friendly"]
+    },
+    {
+      "id": "10",
+      "name": "Mushroom Risotto",
+      "ingredients": ["arborio rice", "mushrooms", "onion", "garlic", "white wine", "vegetable broth", "parmesan cheese", "butter", "thyme"],
+      "instructions": "Sauté mushrooms, onion, and garlic. Add rice and wine. Gradually add hot broth, stirring constantly. Finish with butter and parmesan.",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 30,
+      "servings": 4,
+      "tags": ["italian", "vegetarian", "comfort food"]
+    },
+    {
+      "id": "11",
+      "name": "Banana Bread",
+      "ingredients": ["ripe bananas", "flour", "butter", "sugar", "eggs", "baking soda", "vanilla extract", "cinnamon"],
+      "instructions": "Mash bananas and mix with melted butter. Add remaining ingredients and mix. Bake at 350°F for 60 minutes.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 60,
+      "servings": 8,
+      "tags": ["baking", "breakfast", "sweet"]
+    },
+    {
+      "id": "12",
+      "name": "Lemon Garlic Salmon",
+      "ingredients": ["salmon fillets", "lemon", "garlic", "butter", "dill", "salt", "pepper", "olive oil"],
+      "instructions": "Season salmon with salt and pepper. Sear in olive oil. Add butter, garlic, and lemon juice. Bake until cooked through.",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "tags": ["seafood", "healthy", "quick"]
+    },
+    {
+      "id": "13",
+      "name": "Vegetable Lasagna",
+      "ingredients": ["lasagna noodles", "zucchini", "spinach", "ricotta cheese", "mozzarella cheese", "parmesan cheese", "tomato sauce", "garlic", "basil"],
+      "instructions": "Layer noodles with vegetables, cheeses, and sauce. Bake at 375°F for 45 minutes covered, then 15 minutes uncovered.",
+      "prepTimeMinutes": 30,
+      "cookTimeMinutes": 60,
+      "servings": 8,
+      "tags": ["vegetarian", "italian", "comfort food"]
+    },
+    {
+      "id": "14",
+      "name": "Chicken Noodle Soup",
+      "ingredients": ["chicken breast", "carrots", "celery", "onion", "chicken broth", "egg noodles", "thyme", "bay leaf", "parsley"],
+      "instructions": "Simmer chicken in broth until cooked. Remove and shred. Cook vegetables in broth, add noodles and chicken. Season and serve.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 30,
+      "servings": 6,
+      "tags": ["soup", "comfort food", "winter"]
+    },
+    {
+      "id": "15",
+      "name": "Beef Stir Fry",
+      "ingredients": ["beef strips", "bell peppers", "snap peas", "carrots", "soy sauce", "garlic", "ginger", "sesame oil", "rice"],
+      "instructions": "Stir-fry beef until browned. Add vegetables and cook until tender-crisp. Add sauce ingredients and simmer briefly. Serve over rice.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "servings": 4,
+      "tags": ["asian", "quick", "beef"]
+    },
+    {
+      "id": "16",
+      "name": "Blueberry Pancakes",
+      "ingredients": ["flour", "milk", "eggs", "sugar", "baking powder", "salt", "butter", "blueberries", "maple syrup"],
+      "instructions": "Mix dry ingredients. Add wet ingredients and stir until just combined. Fold in blueberries. Cook on a griddle until golden brown.",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "tags": ["breakfast", "sweet", "vegetarian"]
+    },
+    {
+      "id": "17",
+      "name": "Caprese Salad",
+      "ingredients": ["tomatoes", "fresh mozzarella", "basil", "olive oil", "balsamic vinegar", "salt", "pepper"],
+      "instructions": "Slice tomatoes and mozzarella. Arrange with basil leaves. Drizzle with olive oil and balsamic vinegar. Season with salt and pepper.",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "servings": 4,
+      "tags": ["italian", "salad", "vegetarian", "quick"]
+    },
+    {
+      "id": "18",
+      "name": "Beef Stroganoff",
+      "ingredients": ["beef strips", "mushrooms", "onion", "garlic", "beef broth", "sour cream", "egg noodles", "butter", "flour"],
+      "instructions": "Brown beef. Sauté mushrooms and onions. Make a roux with butter and flour, add broth. Combine with beef and vegetables, stir in sour cream. Serve over noodles.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "servings": 4,
+      "tags": ["beef", "comfort food", "russian"]
+    },
+    {
+      "id": "19",
+      "name": "Eggplant Parmesan",
+      "ingredients": ["eggplant", "flour", "eggs", "breadcrumbs", "marinara sauce", "mozzarella cheese", "parmesan cheese", "basil"],
+      "instructions": "Slice eggplant, dredge in flour, dip in egg, coat in breadcrumbs. Fry until golden. Layer with sauce and cheese. Bake until bubbly.",
+      "prepTimeMinutes": 30,
+      "cookTimeMinutes": 45,
+      "servings": 6,
+      "tags": ["italian", "vegetarian", "comfort food"]
+    },
+    {
+      "id": "20",
+      "name": "Pumpkin Soup",
+      "ingredients": ["pumpkin", "onion", "garlic", "vegetable broth", "cream", "nutmeg", "cinnamon", "olive oil", "salt", "pepper"],
+      "instructions": "Sauté onion and garlic. Add pumpkin and broth. Simmer until soft. Blend until smooth. Add cream and spices. Heat through and serve.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 30,
+      "servings": 4,
+      "tags": ["soup", "vegetarian", "fall", "winter"]
+    },
+    {
+      "id": "21",
+      "name": "Shrimp Scampi",
+      "ingredients": ["shrimp", "spaghetti", "garlic", "white wine", "lemon juice", "butter", "parsley", "red pepper flakes", "salt", "pepper"],
+      "instructions": "Cook pasta. Sauté shrimp with garlic, add wine and lemon juice. Stir in butter and seasonings. Toss with pasta and serve.",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "tags": ["seafood", "pasta", "italian", "quick"]
+    },
+    {
+      "id": "22",
+      "name": "Chickpea Curry",
+      "ingredients": ["chickpeas", "onion", "garlic", "ginger", "tomatoes", "coconut milk", "curry powder", "cumin", "coriander", "rice"],
+      "instructions": "Sauté onion, garlic, and ginger. Add spices, tomatoes, and chickpeas. Simmer with coconut milk until flavors meld. Serve over rice.",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 25,
+      "servings": 4,
+      "tags": ["vegetarian", "indian", "spicy", "vegan"]
+    },
+    {
+      "id": "23",
+      "name": "French Toast",
+      "ingredients": ["bread", "eggs", "milk", "cinnamon", "vanilla extract", "butter", "maple syrup", "powdered sugar"],
+      "instructions": "Whisk eggs, milk, cinnamon, and vanilla. Dip bread slices and cook in butter until golden brown. Top with syrup and powdered sugar.",
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 10,
+      "servings": 4,
+      "tags": ["breakfast", "sweet", "quick"]
+    },
+    {
+      "id": "24",
+      "name": "Fish Tacos",
+      "ingredients": ["white fish", "cabbage", "lime", "avocado", "sour cream", "tortillas", "cilantro", "taco seasoning"],
+      "instructions": "Season and cook fish. Warm tortillas. Prepare slaw with cabbage, lime, and cilantro. Assemble tacos with fish, slaw, avocado, and sour cream.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "servings": 4,
+      "tags": ["seafood", "mexican", "quick", "healthy"]
+    },
+    {
+      "id": "25",
+      "name": "Beef Stew",
+      "ingredients": ["beef chuck", "potatoes", "carrots", "onion", "celery", "beef broth", "tomato paste", "flour", "garlic", "bay leaves", "thyme"],
+      "instructions": "Brown beef. Add vegetables and sauté. Stir in flour, then broth and seasonings. Simmer until meat is tender and vegetables are cooked.",
+      "prepTimeMinutes": 25,
+      "cookTimeMinutes": 120,
+      "servings": 6,
+      "tags": ["beef", "comfort food", "winter", "slow cook"]
+    },
+    {
+      "id": "26",
+      "name": "Spinach and Feta Stuffed Chicken",
+      "ingredients": ["chicken breasts", "spinach", "feta cheese", "garlic", "olive oil", "lemon juice", "oregano", "salt", "pepper"],
+      "instructions": "Cut pockets in chicken breasts. Mix spinach, feta, and seasonings. Stuff chicken and secure with toothpicks. Bake until chicken is cooked through.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "servings": 4,
+      "tags": ["chicken", "healthy", "mediterranean"]
+    },
+    {
+      "id": "27",
+      "name": "Apple Crisp",
+      "ingredients": ["apples", "oats", "flour", "brown sugar", "cinnamon", "nutmeg", "butter", "lemon juice"],
+      "instructions": "Slice apples and toss with lemon juice. Mix remaining ingredients for topping. Place apples in dish, cover with topping. Bake until golden and bubbly.",
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 45,
+      "servings": 8,
+      "tags": ["dessert", "baking", "fall", "fruit"]
+    },
+    {
+      "id": "28",
+      "name": "Pad Thai",
+      "ingredients": ["rice noodles", "chicken", "eggs", "bean sprouts", "green onions", "peanuts", "lime", "fish sauce", "tamarind paste", "brown sugar", "garlic"],
+      "instructions": "Soak noodles. Stir-fry chicken, add garlic and eggs. Add noodles and sauce mixture. Toss with bean sprouts and green onions. Garnish with peanuts and lime.",
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "tags": ["thai", "asian", "noodles"]
+    },
+    {
+      "id": "29",
+      "name": "Quinoa Salad",
+      "ingredients": ["quinoa", "cucumber", "cherry tomatoes", "red onion", "feta cheese", "kalamata olives", "olive oil", "lemon juice", "oregano"],
+      "instructions": "Cook quinoa and cool. Chop vegetables. Combine all ingredients with dressing of olive oil, lemon juice, and oregano.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 15,
+      "servings": 6,
+      "tags": ["vegetarian", "salad", "healthy", "mediterranean"]
+    },
+    {
+      "id": "30",
+      "name": "Chicken Enchiladas",
+      "ingredients": ["chicken breast", "tortillas", "enchilada sauce", "onion", "bell pepper", "cheese", "sour cream", "cilantro"],
+      "instructions": "Cook and shred chicken. Sauté vegetables. Mix with chicken and some sauce. Roll in tortillas, top with remaining sauce and cheese. Bake until bubbly.",
+      "prepTimeMinutes": 25,
+      "cookTimeMinutes": 30,
+      "servings": 6,
+      "tags": ["mexican", "chicken", "comfort food"]
+    },
+    {
+      "id": "31",
+      "name": "Falafel",
+      "ingredients": ["chickpeas", "onion", "garlic", "parsley", "cilantro", "cumin", "coriander", "flour", "baking powder", "vegetable oil"],
+      "instructions": "Process chickpeas, herbs, and spices. Form into balls, refrigerate for 1 hour. Fry until golden brown. Serve with pita and tahini sauce.",
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "tags": ["vegetarian", "mediterranean", "vegan", "healthy"]
+    },
+    {
+      "id": "32",
+      "name": "Tomato Basil Soup",
+      "ingredients": ["tomatoes", "onion", "garlic", "vegetable broth", "basil", "cream", "olive oil", "salt", "pepper"],
+      "instructions": "Sauté onion and garlic. Add tomatoes and broth. Simmer until tomatoes break down. Blend with basil. Add cream and seasonings.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "servings": 4,
+      "tags": ["soup", "vegetarian", "comfort food"]
+    },
+    {
+      "id": "33",
+      "name": "Teriyaki Salmon",
+      "ingredients": ["salmon fillets", "teriyaki sauce", "garlic", "ginger", "honey", "sesame seeds", "green onions", "rice"],
+      "instructions": "Marinate salmon in teriyaki mixture. Bake or grill until cooked through. Garnish with sesame seeds and green onions. Serve over rice.",
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "tags": ["seafood", "asian", "healthy", "quick"]
+    },
+    {
+      "id": "34",
+      "name": "Black Bean Burgers",
+      "ingredients": ["black beans", "onion", "bell pepper", "garlic", "bread crumbs", "egg", "cumin", "paprika", "burger buns", "lettuce", "tomato"],
+      "instructions": "Mash beans. Mix with sautéed vegetables, breadcrumbs, egg, and spices. Form patties and cook until crispy outside. Serve on buns with toppings.",
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 10,
+      "servings": 4,
+      "tags": ["vegetarian", "burger", "healthy"]
+    },
+    {
+      "id": "35",
+      "name": "Tiramisu",
+      "ingredients": ["mascarpone cheese", "eggs", "sugar", "coffee", "ladyfingers", "cocoa powder", "vanilla extract"],
+      "instructions": "Beat egg yolks with sugar, add mascarpone. Whip egg whites and fold in. Dip ladyfingers in coffee and layer with cream mixture. Dust with cocoa powder.",
+      "prepTimeMinutes": 30,
+      "cookTimeMinutes": 0,
+      "servings": 8,
+      "tags": ["dessert", "italian", "no-cook"]
+    },
+    {
+      "id": "36",
+      "name": "Roast Chicken",
+      "ingredients": ["whole chicken", "butter", "garlic", "lemon", "rosemary", "thyme", "salt", "pepper", "onion"],
+      "instructions": "Rub chicken with butter, herbs, and seasonings. Stuff cavity with lemon, garlic, and onion. Roast until internal temperature reaches 165°F.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 75,
+      "servings": 6,
+      "tags": ["chicken", "dinner", "family meal", "classic"]
+    },
+    {
+      "id": "37",
+      "name": "Guacamole",
+      "ingredients": ["avocados", "lime juice", "red onion", "tomato", "cilantro", "jalapeño", "garlic", "salt"],
+      "instructions": "Mash avocados with lime juice. Fold in diced onion, tomato, cilantro, and jalapeño. Season with garlic and salt to taste.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 0,
+      "servings": 4,
+      "tags": ["mexican", "appetizer", "vegan", "quick"]
+    },
+    {
+      "id": "38",
+      "name": "Pho",
+      "ingredients": ["beef bones", "rice noodles", "beef slices", "onion", "ginger", "star anise", "cinnamon", "bean sprouts", "basil", "lime", "fish sauce"],
+      "instructions": "Simmer bones with spices for broth. Cook noodles separately. Place noodles in bowl with raw beef slices, pour hot broth over. Serve with garnishes.",
+      "prepTimeMinutes": 30,
+      "cookTimeMinutes": 180,
+      "servings": 6,
+      "tags": ["vietnamese", "soup", "beef", "slow cook"]
+    },
+    {
+      "id": "39",
+      "name": "Cauliflower Fried Rice",
+      "ingredients": ["cauliflower", "eggs", "carrots", "peas", "onion", "garlic", "ginger", "soy sauce", "sesame oil", "green onions"],
+      "instructions": "Pulse cauliflower into rice-sized pieces. Scramble eggs, set aside. Stir-fry vegetables, add cauliflower rice and seasonings. Return eggs and mix.",
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "servings": 4,
+      "tags": ["low-carb", "healthy", "asian", "quick"]
+    },
+    {
+      "id": "40",
+      "name": "Strawberry Shortcake",
+      "ingredients": ["strawberries", "sugar", "flour", "baking powder", "salt", "butter", "eggs", "vanilla extract", "whipped cream"],
+      "instructions": "Macerate strawberries with sugar. Make biscuits with flour, baking powder, salt, butter, and eggs. Split biscuits, layer with berries and whipped cream.",
+      "prepTimeMinutes": 25,
+      "cookTimeMinutes": 15,
+      "servings": 8,
+      "tags": ["dessert", "summer", "fruit", "sweet"]
+    }
+  ]
+} 
