@@ -2,6 +2,14 @@
 
 Discover and explore delicious recipes
 
+## How to Submit
+
+1. Fork this repository
+2. Clone your fork locally
+3. Complete the coding exercise below
+4. Push your changes and create a pull request against your fork
+5. Send us the PR link as your submission
+
 ### Setup & Run
 
 ```bash
