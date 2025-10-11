@@ -14,7 +14,7 @@ jest.mock('path', () => ({
 
 // mock uuid
 jest.mock('uuid', () => ({
-  v4: jest.fn(() => 'mock-uuid'),
+  v4: jest.fn().mockReturnValue('mock-uuid'),
 }));
 
 describe('recipeService', () => {
@@ -97,7 +97,7 @@ describe('recipeService', () => {
   });
 
   describe('createRecipe', () => {
-    it('creates a new recipe with a generated ID', () => {
+    it('creates a new recipe with a generated ID', async () => {
       // arrange
       const newRecipeData = {
         name: 'New Recipe',
@@ -110,7 +110,7 @@ describe('recipeService', () => {
       };
 
       // act
-      const result = createRecipe(newRecipeData);
+      const result = await createRecipe(newRecipeData); // await to resolve the promise
 
       // assert
       expect(result.id).toBe('mock-uuid');

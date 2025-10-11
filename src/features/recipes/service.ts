@@ -1,6 +1,7 @@
+"use server"
+
 import fs from 'fs';
 import path from 'path';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface Recipe {
   id: string;
@@ -40,16 +41,13 @@ const writeDataFile = (data: RecipesData): void => {
   }
 };
 
-// get all recipes with optional filtering and pagination
-export const getRecipes = async (
+// Server-side function for getting recipes (no HTTP fetch)
+export const getRecipesServer = async (
   page: number = 1,
   pageSize: number = 10,
   search: string = '',
   tags: string[] = []
 ): Promise<{ data: Recipe[]; total: number }> => {
-  // simulate a slow response
-  await randomDelay();
-
   const data = readDataFile();
   let filteredRecipes = [...data.recipes];
 
@@ -87,22 +85,50 @@ export const getRecipes = async (
   };
 };
 
+// Client-side API function (for use in components)
+export const getRecipes = async (
+  page: number = 1,
+  pageSize: number = 10,
+  search: string = '',
+  tags: string[] = []
+): Promise<{ data: Recipe[]; total: number }> => {
+  const params = new URLSearchParams();
+  params.append('page', page.toString());
+  params.append('pageSize', pageSize.toString());
+
+  if (search) {
+    params.append('search', search);
+  }
+
+  if (tags.length > 0) {
+    params.append('tags', tags.join(','));
+  }
+
+  const response = await fetch(`/api/recipes?${params.toString()}`, {
+    cache: 'no-store' // Prevent caching issues during development
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch recipes: ${response.status}`);
+  }
+
+  return await response.json();
+};
+
 // get a single recipe by id
-export const getRecipeById = (id: string): Recipe | null => {
-  const data = readDataFile();
-  return data.recipes.find(recipe => recipe.id === id) || null;
+export const getRecipeById = async(id: string): Promise<Recipe | null> => {
+  const data = await readDataFile();
+  const recipe = data.recipes.find(recipe => recipe.id === id);
+  return recipe || null;
 };
 
 // create a new recipe
 export const createRecipe = async (recipeData: Omit<Recipe, 'id'>): Promise<Recipe> => {
-  // simulate a slow response
-  await randomDelay();
-
   const data = readDataFile();
 
   // create new recipe with generated id
   const newRecipe: Recipe = {
-    id: uuidv4(),
+    id: Math.floor(Math.random() * 90 + 10).toString(),
     ...recipeData,
   };
 
@@ -120,9 +146,6 @@ export const updateRecipe = async (
   id: string,
   recipeData: Partial<Omit<Recipe, 'id'>>
 ): Promise<Recipe | null> => {
-  // simulate a slow response
-  await randomDelay();
-
   const data = readDataFile();
 
   // find recipe index
@@ -146,9 +169,6 @@ export const updateRecipe = async (
 
 // delete a recipe
 export const deleteRecipe = async (id: string): Promise<boolean> => {
-  // simulate a slow response
-  await randomDelay();
-
   const data = readDataFile();
 
   // find recipe index
@@ -162,8 +182,4 @@ export const deleteRecipe = async (id: string): Promise<boolean> => {
   writeDataFile(data);
 
   return true;
-};
-
-const randomDelay = async (start = 500, end = 1000) => {
-  return new Promise(resolve => setTimeout(resolve, Math.random() * (end - start) + start));
 };

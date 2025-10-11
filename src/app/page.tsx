@@ -2,13 +2,54 @@
 
 import { useState } from 'react';
 import { useRecipes } from '@/features/recipes/hooks/useRecipes';
+import { useRandomRecipeImages } from '@/features/recipes/hooks/useRandomRecipeImages';
 import { RecipeCard } from '@/features/recipes/components/RecipeCard';
+import { LuPlus } from "react-icons/lu";
+import CreateRecipeModal from '@/components/modals/create-recipe/CreateRecipeModal';
+import SpinLoader from '@/components/ui/spinner';
+
+interface RecipeData {
+  name: string;
+  prepTimeMinutes: number;
+  cookTimeMinutes: number;
+  servings: number;
+  instructions: string;
+  ingredients: string[];
+  tags: string[];
+}
 
 export default function Home() {
   const [tagInput, setTagInput] = useState('');
-  const { recipes, loading, error, pagination, filters } = useRecipes();
+  const { 
+    recipes, 
+    loading: recipesLoading, 
+    error: recipesError, 
+    pagination, 
+    filters,
+    createRecipe,
+  } = useRecipes();
+  
+  const { randomRecipeImages, imageLoading } = useRandomRecipeImages(recipes); 
 
+  const [createRecipeModal, setCreateModal] = useState(false);
   const [currentTags, setCurrentTags] = useState<string[]>([]);
+
+  const getOpenModal = () => setCreateModal(true);
+  const getCloseModal = () => setCreateModal(false);
+
+  // get form submission from modal
+  const getCreateRecipe = async (recipeData: RecipeData) => {
+    try {
+      // Call createRecipe hook
+      await createRecipe(recipeData);
+      
+      getCloseModal();
+      console.log('Recipe created successfully!');
+      console.log('Test');
+    } catch (error) {
+      console.error('Failed to create recipe:', error);
+    }
+  };
 
   const addTag = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +71,20 @@ export default function Home() {
     <div className="container mx-auto max-w-6xl py-8 px-4">
       <div className="flex flex-col gap-6">
         <h1 className="text-4xl font-bold">FlavorVault</h1>
-        <p className="text-lg">Discover and explore delicious recipes</p>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="justify-self-start text-lg">Discover and explore delicious recipes</div>
+          <div className="justify-self-end">
+            <button
+                className="flex justify-center items-center bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-md"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    getOpenModal();
+                  }}
+              >
+                <LuPlus />&nbsp;Create Recipe
+            </button>
+          </div>
+        </div>
 
         <div>
           <div className="flex flex-col gap-4">
@@ -58,7 +112,7 @@ export default function Home() {
                 Add
               </button>
             </div>
-
+            
             {currentTags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {currentTags.map(tag => (
@@ -77,19 +131,22 @@ export default function Home() {
           </div>
         </div>
 
-        {loading && <p>Loading recipes...</p>}
-
-        {error && <p className="text-red-500">Error loading recipes: {error.message}</p>}
-
-        {!loading && !error && recipes.length === 0 && (
+        {recipesLoading && <SpinLoader text="Loading Recipes..." />}
+        {recipesError && <p className="text-red-500">Error loading recipes: {recipesError.message}</p>}
+        {!recipesLoading && !recipesError && recipes.length === 0 && (
           <p>No recipes found. Try a different search.</p>
         )}
 
-        {!loading && recipes.length > 0 && (
+        {!recipesLoading && recipes.length > 0 && (
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recipes.map(recipe => (
-                <RecipeCard key={recipe.id} recipe={recipe} />
+                <RecipeCard 
+                  key={recipe.id} 
+                  recipe={recipe} 
+                  isLoading={imageLoading[recipe.id] || false} 
+                  image={randomRecipeImages[recipe.id] || ''}
+                />
               ))}
             </div>
 
@@ -139,6 +196,11 @@ export default function Home() {
           </div>
         )}
       </div>
+      {/* Create Recipe Modal */}
+      <CreateRecipeModal 
+        isOpen={createRecipeModal} 
+        onSubmit={getCreateRecipe} 
+        onClose={getCloseModal} />
     </div>
   );
 }
