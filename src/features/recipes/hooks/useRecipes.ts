@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'; 
 import { Recipe, RecipesResponse } from '@/features/recipes/types';
-import useDebounce from '@/hooks/useDebounce'; // Import your debounce hook
+import useDebounce from '@/hooks/useDebounce';
+import { createRecipe as createRecipeAPI } from '@/features/recipes/service'; 
 
 interface UseRecipesParams {
   initialPage?: number;
@@ -30,6 +31,8 @@ interface UseRecipesReturn {
   pagination: PaginationState;
   filters: FilterState;
   searchRecipes: (query?: string, tags?: string[]) => void;
+  createRecipe: (recipeData: Omit<Recipe, 'id'>) => Promise<Recipe>; // Added this
+  isCreating: boolean; // Added this
 }
 
 const fetchRecipes = async ({
@@ -68,7 +71,7 @@ export function useRecipes({
   initialPage = 1,
   initialPageSize = 10,
 }: UseRecipesParams = {}): UseRecipesReturn {
-
+  const queryClient = useQueryClient(); // Added this
   const [page, setPage] = useState<number>(initialPage);
   const [pageSize, setPageSize] = useState<number>(initialPageSize);
   const [search, setSearch] = useState<string>('');
@@ -84,10 +87,19 @@ export function useRecipes({
       fetchRecipes({
         page,
         pageSize,
-        search: debouncedSearch, // use debounced search query instead
+        search: debouncedSearch,
         tags: currentTags.length > 0 ? currentTags : undefined,
       }),
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000,
+  });
+
+  // CreateRecipe mutation
+  const { mutateAsync: createRecipeMutation, isPending: isCreating } = useMutation({
+    mutationFn: createRecipeAPI,
+    onSuccess: () => {
+      // Invalidate queries refetch recipes after creation
+      queryClient.invalidateQueries({ queryKey: ['recipes'] });
+    },
   });
 
   const handleSetPage = (newPage: number) => {
@@ -96,13 +108,11 @@ export function useRecipes({
 
   const handleSetPageSize = (newPageSize: number) => {
     setPageSize(newPageSize);
-    // reset to first page when page size changes
     setPage(1);
   };
 
   const handleSetTags = (tags: string[]) => {
     setCurrentTags(tags);
-    // reset to first page when tags change
     setPage(1);
   };
 
@@ -115,7 +125,6 @@ export function useRecipes({
       setCurrentTags(tags);
     }
 
-    // reset to first page on new search
     if (
       (query !== undefined && query !== search) ||
       (tags !== undefined && JSON.stringify(tags) !== JSON.stringify(currentTags))
@@ -129,6 +138,8 @@ export function useRecipes({
     loading: isLoading,
     error: error instanceof Error ? error : null,
     searchRecipes,
+    createRecipe: createRecipeMutation,
+    isCreating,
     pagination: {
       page,
       pageSize,

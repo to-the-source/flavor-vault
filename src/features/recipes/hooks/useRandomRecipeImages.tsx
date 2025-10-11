@@ -11,7 +11,7 @@ export const useRandomRecipeImages = (recipes: Recipe[]): UseRandomRecipeImagesR
   const [imageLoading, setImageLoading] = useState<Record<string, boolean>>({});
 
   const fetchImageForRecipe = useCallback(async (recipeId: string) => {
-    // Don't fetch if we already have an image or are loading
+    // Don't fetch if exists or loading
     if (randomRecipeImages[recipeId] || imageLoading[recipeId]) {
       return;
     }
@@ -19,6 +19,7 @@ export const useRandomRecipeImages = (recipes: Recipe[]): UseRandomRecipeImagesR
     setImageLoading(prev => ({ ...prev, [recipeId]: true }));
     
     try {
+      // Using foodish random img api to fetch a random image for the recipe
       const response = await fetch('https://foodish-api.com/api');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -32,7 +33,7 @@ export const useRandomRecipeImages = (recipes: Recipe[]): UseRandomRecipeImagesR
     } finally {
       setImageLoading(prev => ({ ...prev, [recipeId]: false }));
     }
-  }, [randomRecipeImages, imageLoading]);
+  }, [randomRecipeImages, imageLoading]); 
 
   // Fetch images when recipes change
   useEffect(() => {
@@ -43,7 +44,7 @@ export const useRandomRecipeImages = (recipes: Recipe[]): UseRandomRecipeImagesR
         }
       });
     }
-  }, [recipes, randomRecipeImages, fetchImageForRecipe]);
+  }, [recipes, fetchImageForRecipe]);
 
   return { randomRecipeImages, imageLoading };
 };

@@ -2,13 +2,23 @@ import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import CreateRecipeForm from './CreateRecipeForm';
 
+interface ModalRecipeData {
+  name: string;
+  prepTimeMinutes: number;
+  cookTimeMinutes: number;
+  servings: number;
+  instructions: string;
+  ingredients: string[];
+  tags: string[];
+}
 interface CreateRecipeModalProps {
   isOpen: boolean;
+  onSubmit: (formData: ModalRecipeData) => void;
   onClose: () => void;
   children?: React.ReactNode;
 }
 
-const CreateRecipeModal: React.FC<CreateRecipeModalProps> = ({ isOpen, onClose, children }) => {
+const CreateRecipeModal: React.FC<CreateRecipeModalProps> = ({ isOpen, onSubmit, onClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,9 +73,9 @@ const CreateRecipeModal: React.FC<CreateRecipeModalProps> = ({ isOpen, onClose, 
             </div>
           </div>
           
-          {/* Create Recipe Modal */}
+          {/* Create Recipe Modall */}
           <div className="p-6 overflow-y-auto flex-1">
-            <CreateRecipeForm />
+            <CreateRecipeForm onSubmit={onSubmit} />
             {children}
           </div>
           <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 rounded-b-lg">

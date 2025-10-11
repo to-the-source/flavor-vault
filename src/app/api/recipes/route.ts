@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getRecipes, createRecipe } from '@/features/recipes/service';
+import { getRecipesServer, createRecipe } from '@/features/recipes/service';
 
+interface RecipeCreateBody {
+  name: string;
+  instructions: string;
+  prepTimeMinutes: number;
+  cookTimeMinutes: number;
+  servings: number;
+  ingredients?: string[];
+  tags?: string[];
+}
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
@@ -9,8 +18,8 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search') || '';
     const tags = searchParams.get('tags')?.split(',').filter(Boolean) || [];
 
-    // Get recipes with pagination and filters
-    const { data, total } = await getRecipes(page, pageSize, search, tags);
+    // Use server-side function directly (not HTTP fetch)
+    const { data, total } = await getRecipesServer(page, pageSize, search, tags);
 
     return NextResponse.json({
       data,
@@ -24,23 +33,13 @@ export async function GET(request: NextRequest) {
   }
 }
 
-interface RecipeCreateBody {
-  name: string;
-  instructions: string;
-  prepTimeMinutes: number;
-  cookTimeMinutes: number;
-  servings: number;
-  ingredients?: string[];
-  tags?: string[];
-}
-
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as RecipeCreateBody;
 
     // validate required fields
     if (!body.name || !body.instructions) {
-      return NextResponse.json({ error: 'Name and instructions are required' }, { status: 400 });
+      return NextResponse.json({ error: 'Title/Name and instructions are required' }, { status: 400 });
     }
 
     // create the recipe
@@ -54,13 +53,7 @@ export async function POST(request: Request) {
       tags: body.tags || [],
     });
 
-    return NextResponse.json(
-      {
-        message: 'Recipe created successfully',
-        recipeId: newRecipe.id,
-      },
-      { status: 201 }
-    );
+    return NextResponse.json(newRecipe, { status: 201 }); // Return the full recipe
   } catch (error) {
     console.error('Error creating recipe:', error);
     return NextResponse.json({ error: 'Failed to create recipe' }, { status: 500 });

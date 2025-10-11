@@ -8,18 +8,48 @@ import { LuPlus } from "react-icons/lu";
 import CreateRecipeModal from '@/components/modals/create-recipe/CreateRecipeModal';
 import SpinLoader from '@/components/ui/spinner';
 
+interface RecipeData {
+  name: string;
+  prepTimeMinutes: number;
+  cookTimeMinutes: number;
+  servings: number;
+  instructions: string;
+  ingredients: string[];
+  tags: string[];
+}
+
 export default function Home() {
   const [tagInput, setTagInput] = useState('');
-  const { recipes, loading: recipesLoading, error: recipesError, pagination, filters } = useRecipes();
+  const { 
+    recipes, 
+    loading: recipesLoading, 
+    error: recipesError, 
+    pagination, 
+    filters,
+    createRecipe,
+  } = useRecipes();
   
-  //Get Custom random recipes image hook
   const { randomRecipeImages, imageLoading } = useRandomRecipeImages(recipes); 
 
   const [createRecipeModal, setCreateModal] = useState(false);
   const [currentTags, setCurrentTags] = useState<string[]>([]);
 
-  const handleOpenModal = () => setCreateModal(true);
-  const handleCloseModal = () => setCreateModal(false);
+  const getOpenModal = () => setCreateModal(true);
+  const getCloseModal = () => setCreateModal(false);
+
+  // get form submission from modal
+  const getCreateRecipe = async (recipeData: RecipeData) => {
+    try {
+      // Call createRecipe hook
+      await createRecipe(recipeData);
+      
+      getCloseModal();
+      console.log('Recipe created successfully!');
+      console.log('Test');
+    } catch (error) {
+      console.error('Failed to create recipe:', error);
+    }
+  };
 
   const addTag = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,7 +78,7 @@ export default function Home() {
                 className="flex justify-center items-center bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-md"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleOpenModal();
+                    getOpenModal();
                   }}
               >
                 <LuPlus />&nbsp;Create Recipe
@@ -166,7 +196,11 @@ export default function Home() {
           </div>
         )}
       </div>
-      <CreateRecipeModal isOpen={createRecipeModal} onClose={handleCloseModal} />
+      {/* Create Recipe Modal */}
+      <CreateRecipeModal 
+        isOpen={createRecipeModal} 
+        onSubmit={getCreateRecipe} 
+        onClose={getCloseModal} />
     </div>
   );
 }
