@@ -1,14 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRecipes } from '@/features/recipes/hooks/useRecipes';
 import { RecipeCard } from '@/features/recipes/components/RecipeCard';
+import { LuPlus } from "react-icons/lu";
+import useDebounce from '@/hooks/useDebounce';
+import CreateRecipeModal from '@/components/modals/create-recipe/CreateRecipeModal';
+import SpinLoader from '@/components/ui/spinner';
 
 export default function Home() {
   const [tagInput, setTagInput] = useState('');
   const { recipes, loading, error, pagination, filters } = useRecipes();
+  const [recipeImages, setRecipeImages] = useState<Record<string, string>>({});
+  const [imageLoading, setImageLoading] = useState<Record<string, boolean>>({});
+
+  const [createRecipeModal, setCreateModal] = useState(false);
+
+  const handleOpenModal = () => setCreateModal(true);
+  const handleCloseModal = () => setCreateModal(false);
 
   const [currentTags, setCurrentTags] = useState<string[]>([]);
+  const debouncedSearch = useDebounce(filters.search, 300);
 
   const addTag = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,11 +38,69 @@ export default function Home() {
     filters.setTags(newTags);
   };
 
+  // Using Random Image from foodish-api
+  // Stop Render on every render - ucb
+  const fetchRandomImageForRecipe = useCallback(async (recipeId: string) => {
+    // Edgecase to stop rendering on every render
+    if (recipeImages[recipeId] || imageLoading[recipeId]) {
+      return;
+    }
+    
+    setImageLoading(prev => ({ ...prev, [recipeId]: true }));
+    
+    try {
+      const response = await fetch('https://foodish-api.com/api'); // Should go in env file
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setRecipeImages(prev => ({ ...prev, [recipeId]: data.image }));
+    } catch (err) {
+      console.error(`Error fetching image for recipe ${recipeId}:`, err);
+      // Set Backup image if error
+      setRecipeImages(prev => ({ ...prev, [recipeId]: '/default-food-image.jpg' }));
+    } finally {
+      // Set loading to false, even on error
+      setImageLoading(prev => ({ ...prev, [recipeId]: false }));
+    }
+  }, [recipeImages, imageLoading]); // useCallback dependencies
+
+  // Fetch images only when recipes change (not when recipeImages changes)
+  useEffect(() => {
+    if (recipes.length > 0) {
+      recipes.forEach(recipe => {
+        if (!recipeImages[recipe.id]) {
+          fetchRandomImageForRecipe(recipe.id);
+        }
+      });
+    }
+  }, [recipes, recipeImages, fetchRandomImageForRecipe]); 
+
+  // Debounced search 
+  useEffect(() => {
+    // Reset if I want new images instead of the one initially loaded
+    // setRecipeImages({});
+    // setImageLoading({});
+  }, [debouncedSearch]);
+
   return (
     <div className="container mx-auto max-w-6xl py-8 px-4">
       <div className="flex flex-col gap-6">
         <h1 className="text-4xl font-bold">FlavorVault</h1>
-        <p className="text-lg">Discover and explore delicious recipes</p>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="justify-self-start text-lg">Discover and explore delicious recipes</div>
+          <div className="justify-self-end">
+            <button
+                className="flex justify-center items-center bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-md"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOpenModal();
+                  }}
+              >
+                <LuPlus />&nbsp;Create Recipe
+            </button>
+          </div>
+        </div>
 
         <div>
           <div className="flex flex-col gap-4">
@@ -58,7 +128,7 @@ export default function Home() {
                 Add
               </button>
             </div>
-
+            
             {currentTags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {currentTags.map(tag => (
@@ -77,10 +147,8 @@ export default function Home() {
           </div>
         </div>
 
-        {loading && <p>Loading recipes...</p>}
-
+        {loading && <SpinLoader text="Loading Recipes..." />}
         {error && <p className="text-red-500">Error loading recipes: {error.message}</p>}
-
         {!loading && !error && recipes.length === 0 && (
           <p>No recipes found. Try a different search.</p>
         )}
@@ -89,7 +157,12 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recipes.map(recipe => (
-                <RecipeCard key={recipe.id} recipe={recipe} />
+                <RecipeCard 
+                  key={recipe.id} 
+                  recipe={recipe} 
+                  isLoading={imageLoading[recipe.id] || false} 
+                  image={recipeImages[recipe.id] || ''}
+                />
               ))}
             </div>
 
@@ -139,6 +212,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      <CreateRecipeModal isOpen={createRecipeModal} onClose={handleCloseModal} />
     </div>
   );
 }

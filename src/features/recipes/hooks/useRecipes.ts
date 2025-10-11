@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Recipe, RecipesResponse } from '@/features/recipes/types';
+import useDebounce from '@/hooks/useDebounce'; // Import your debounce hook
 
 interface UseRecipesParams {
   initialPage?: number;
@@ -67,12 +68,15 @@ export function useRecipes({
   initialPage = 1,
   initialPageSize = 10,
 }: UseRecipesParams = {}): UseRecipesReturn {
+
   const [page, setPage] = useState<number>(initialPage);
   const [pageSize, setPageSize] = useState<number>(initialPageSize);
   const [search, setSearch] = useState<string>('');
   const [currentTags, setCurrentTags] = useState<string[]>([]);
 
-  const queryKey = ['recipes', page, pageSize, search, currentTags];
+  const debouncedSearch = useDebounce(search, 300);
+
+  const queryKey = ['recipes', page, pageSize, debouncedSearch, currentTags];
 
   const { data, isLoading, error } = useQuery({
     queryKey,
@@ -80,7 +84,7 @@ export function useRecipes({
       fetchRecipes({
         page,
         pageSize,
-        search,
+        search: debouncedSearch, // use debounced search query instead
         tags: currentTags.length > 0 ? currentTags : undefined,
       }),
     staleTime: 5 * 60 * 1000, // 5 minutes
