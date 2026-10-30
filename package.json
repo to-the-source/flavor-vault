@@ -11,6 +11,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@tanstack/react-query": "^5.74.4",
     "@types/uuid": "^10.0.0",

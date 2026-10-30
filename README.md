@@ -6,6 +6,10 @@ Discover and explore delicious recipes
 2. Clone your fork locally.
 3. Complete the coding exercise below.
 
+## Prerequisites
+
+- [Node.js](https://nodejs.org/en/download/) >= 22
+
 ## Running
 
 ```bash
